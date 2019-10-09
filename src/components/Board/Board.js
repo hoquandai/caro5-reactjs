@@ -1,8 +1,15 @@
-import React from 'react';
+import React from "react";
 
 function Square(props) {
   return (
-    <button width="30px" height="30px" id={props.id} type="button" className="square" onClick={props.onClick}>
+    <button
+      width="30px"
+      height="30px"
+      id={props.id}
+      type="button"
+      className="square"
+      onClick={props.onClick}
+    >
       {props.value}
     </button>
   );
@@ -13,7 +20,7 @@ class Board extends React.Component {
     super(props);
     this.state = {
       width: 20,
-      height: 20,
+      height: 20
     };
   }
 
@@ -33,7 +40,7 @@ class Board extends React.Component {
     for (let i = index * w; i < index * w + w; i += 1) {
       items.push(this.renderSquare(i));
     }
-    return items.map((item) => item);
+    return items.map(item => item);
   }
 
   renderTable(w, h) {
@@ -42,18 +49,14 @@ class Board extends React.Component {
       table.push(
         <div className="board-row" key={i}>
           {this.renderSquaresInline(i, w)}
-        </div>,
+        </div>
       );
     }
     return table;
   }
 
   render() {
-    return (
-      <div>
-        {this.renderTable(this.state.width, this.state.height)}
-      </div>
-    );
+    return <div>{this.renderTable(this.state.width, this.state.height)}</div>;
   }
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Caro from './Caro';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Caro from "./components/Caro";
+import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<Caro />, document.getElementById('root'));
+ReactDOM.render(<Caro />, document.getElementById("root"));
 
 // If you want your Caro to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Board from './Board';
-import './Caro.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import Board from "../Board";
+import "./Caro.css";
 
 function calculateWinner(squares, w, h) {
   const lines = [];
@@ -10,12 +10,36 @@ function calculateWinner(squares, w, h) {
     const right = [i, i + 1, i + 2, i + 3, i + 4];
     const top = [i, i - w, i - 2 * w, i - 3 * w, i - 4 * w];
     const bottom = [i, i + w, i + 2 * w, i + 3 * w, i + 4 * w];
-    const topLeft = [i, i - (w + 1), i - (w + 1) * 2, i - (w + 1) * 3, i - (w + 1) * 4];
-    const topRight = [i, i - (w - 1), i - (w - 1) * 2, i - (w - 1) * 3, i - (w - 1) * 4];
-    const bottomLeft = [i, i + (w - 1), i + (w - 1) * 2, i + (w - 1) * 3, i + (w - 1) * 4];
-    const bottomRight = [i, i + (w + 1), i + (w + 1) * 2, i + (w + 1) * 3, i + (w + 1) * 4];
+    const topLeft = [
+      i,
+      i - (w + 1),
+      i - (w + 1) * 2,
+      i - (w + 1) * 3,
+      i - (w + 1) * 4
+    ];
+    const topRight = [
+      i,
+      i - (w - 1),
+      i - (w - 1) * 2,
+      i - (w - 1) * 3,
+      i - (w - 1) * 4
+    ];
+    const bottomLeft = [
+      i,
+      i + (w - 1),
+      i + (w - 1) * 2,
+      i + (w - 1) * 3,
+      i + (w - 1) * 4
+    ];
+    const bottomRight = [
+      i,
+      i + (w + 1),
+      i + (w + 1) * 2,
+      i + (w + 1) * 3,
+      i + (w + 1) * 4
+    ];
 
-    if (!left.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!left.some(value => value < 0 || value > w * h - 1)) {
       const lObs = left[0] - 5;
       const rObs = left[0] + 1;
       if (lObs >= 0 && rObs < w * h) {
@@ -24,7 +48,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(left);
     }
-    if (!right.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!right.some(value => value < 0 || value > w * h - 1)) {
       const lObs = right[0] - 1;
       const rObs = right[0] + 5;
       if (lObs >= 0 && rObs < w * h) {
@@ -33,7 +57,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(right);
     }
-    if (!top.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!top.some(value => value < 0 || value > w * h - 1)) {
       const tObs = top[0] - 5 * w;
       const bObs = top[0] + w;
       if (tObs >= 0 && bObs < w * h) {
@@ -42,7 +66,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(top);
     }
-    if (!bottom.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!bottom.some(value => value < 0 || value > w * h - 1)) {
       const tObs = bottom[0] - w;
       const bObs = bottom[0] + 5 * w;
       if (tObs >= 0 && bObs < w * h) {
@@ -51,7 +75,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(bottom);
     }
-    if (!topLeft.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!topLeft.some(value => value < 0 || value > w * h - 1)) {
       const tlObs = topLeft[0] - (w + 1) * 5;
       const brObs = topLeft[0] + (w + 1);
       if (tlObs >= 0 && brObs < w * h) {
@@ -60,7 +84,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(topLeft);
     }
-    if (!topRight.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!topRight.some(value => value < 0 || value > w * h - 1)) {
       const trObs = topRight[0] - (w - 1) * 5;
       const blObs = topRight[0] + (w - 1);
       if (trObs >= 0 && blObs < w * h) {
@@ -69,7 +93,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(topRight);
     }
-    if (!bottomLeft.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!bottomLeft.some(value => value < 0 || value > w * h - 1)) {
       const trObs = bottomLeft[0] - (w - 1);
       const blObs = bottomLeft[0] + (w - 1) * 5;
       if (trObs >= 0 && blObs < w * h) {
@@ -78,7 +102,7 @@ function calculateWinner(squares, w, h) {
 
       lines.push(bottomLeft);
     }
-    if (!bottomRight.some((value) => value < 0 || value > (w * h - 1))) {
+    if (!bottomRight.some(value => value < 0 || value > w * h - 1)) {
       const tlObs = bottomRight[0] - (w + 1);
       const brObs = bottomRight[0] + (w + 1) * 5;
       if (tlObs >= 0 && brObs < w * h) {
@@ -93,13 +117,17 @@ function calculateWinner(squares, w, h) {
       const [a, b, c, d, e] = lines[i];
       const index = lines[i];
 
-      if (squares[a] && squares[a] === squares[b]
-        && squares[a] === squares[c] && squares[a] === squares[d]
-        && squares[a] === squares[e]) {
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c] &&
+        squares[a] === squares[d] &&
+        squares[a] === squares[e]
+      ) {
         for (let j = 0; j < index.length; j++) {
           const val = document.getElementById(`${index[j]}`);
           // val.setAttribute('style[background]', 'blue');
-          val.style.background = 'blue';
+          val.style.background = "blue";
         }
         return squares[a];
       }
@@ -107,16 +135,20 @@ function calculateWinner(squares, w, h) {
       const [a, b, c, d, e, f, g] = lines[i];
       const index = lines[i];
 
-      if (squares[a] && squares[a] === squares[b]
-        && squares[a] === squares[c] && squares[a] === squares[d]
-        && squares[a] === squares[e]) {
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c] &&
+        squares[a] === squares[d] &&
+        squares[a] === squares[e]
+      ) {
         if (squares[f] && squares[g] && squares[f] === squares[g]) {
           return null;
         }
         for (let j = 0; j < index.length - 2; j++) {
           const val = document.getElementById(`${index[j]}`);
           // val.setAttribute('style[background]', 'blue');
-          val.style.background = 'blue';
+          val.style.background = "blue";
         }
         return squares[a];
       }
@@ -132,15 +164,15 @@ class Game extends React.Component {
       history: [
         {
           // squares: [...Array(400).keys()]
-          squares: Array(400).fill(null),
-        },
+          squares: Array(400).fill(null)
+        }
       ],
       stepNumber: 0,
       xIsNext: true,
       width: 20,
       height: 20,
-      sort: 'ASC',
-      positions: [],
+      sort: "ASC",
+      positions: []
     };
   }
 
@@ -150,48 +182,55 @@ class Game extends React.Component {
     pos.push(i);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares, this.state.width, this.state.height) || squares[i]) {
+    if (
+      calculateWinner(squares, this.state.width, this.state.height) ||
+      squares[i]
+    ) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
       history: history.concat([
         {
-          squares,
-        },
+          squares
+        }
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
-      positions: pos,
+      positions: pos
     });
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0,
+      xIsNext: step % 2 === 0
     });
-    const btns = document.getElementsByClassName('one-bold');
+    const btns = document.getElementsByClassName("one-bold");
     for (let i = 0; i < btns.length; i++) {
-      btns[i].style.fontWeight = 'normal';
+      btns[i].style.fontWeight = "normal";
     }
     const id = `btn-${step}`;
-    document.getElementById(id).style.fontWeight = 'bold';
+    document.getElementById(id).style.fontWeight = "bold";
   }
 
   sort() {
     let s = 0;
-    if (this.state.sort === 'ASC') s = 'DESC';
-    else s = 'ASC';
+    if (this.state.sort === "ASC") s = "DESC";
+    else s = "ASC";
     this.setState({
-      sort: s,
+      sort: s
     });
   }
 
   render() {
     const { history } = this.state;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares, this.state.width, this.state.height);
+    const winner = calculateWinner(
+      current.squares,
+      this.state.width,
+      this.state.height
+    );
 
     const moves = history.map((step, move) => {
       const pos = this.state.positions[move];
@@ -204,18 +243,25 @@ class Game extends React.Component {
       if (this.state.positions[move]) {
         return (
           <li key={id}>
-            <button type="button" id={id} className="one-bold" onClick={() => this.jumpTo(move)}>{desc}</button>
+            <button
+              type="button"
+              id={id}
+              className="one-bold"
+              onClick={() => this.jumpTo(move)}
+            >
+              {desc}
+            </button>
           </li>
         );
       }
-      return (<div />);
+      return <div />;
     });
 
     let status;
     if (winner) {
       status = `Winner: ${winner}`;
     } else {
-      status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+      status = `Next player: ${this.state.xIsNext ? "X" : "O"}`;
     }
 
     return (
@@ -224,14 +270,16 @@ class Game extends React.Component {
           <Board
             key={this.state.width}
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
+            onClick={i => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
           <div>{status}</div>
           <ol id="moves">{moves}</ol>
         </div>
-        <button id="sort" type="button" onClick={() => this.sort()}>{this.state.sort}</button>
+        <button id="sort" type="button" onClick={() => this.sort()}>
+          {this.state.sort}
+        </button>
       </div>
     );
   }
@@ -239,6 +287,6 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.getElementById("root"));
 
 export default Game;

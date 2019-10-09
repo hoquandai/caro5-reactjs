@@ -3,8 +3,6 @@ import React from "react";
 function Square(props) {
   return (
     <button
-      width="30px"
-      height="30px"
       id={props.id}
       type="button"
       className="square"

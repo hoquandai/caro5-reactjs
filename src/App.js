@@ -47,19 +47,25 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
+        <nav className="navbar navbar-light">
+          <ul className="links">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
             </li>
-            <li>
-              <Link to="/user/register">Register</Link>
+            <li className="nav-item">
+              <Link className="nav-link" to="/user/register">
+                Register
+              </Link>
             </li>
-            <li>
-              <Link to="/user/login">Login</Link>
+            <li className="nav-item">
+              <Link className="nav-link" to="/user/login">
+                Login
+              </Link>
             </li>
-            <li>
-              <Link id="logged" to="/loggedin">
+            <li className="nav-item">
+              <Link className="nav-link" id="logged" to="/loggedin">
                 Loggedin
               </Link>
             </li>

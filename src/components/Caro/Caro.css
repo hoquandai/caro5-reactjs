@@ -12,6 +12,7 @@ ul {
   clear: both;
   content: "";
   display: table;
+  width: 784px;
 }
 
 .status {
@@ -36,22 +37,94 @@ ul {
 .square:focus {
   outline: none;
 }
-
-.kbd-navigation .square:focus {
+mon .kbd-navigation .square:focus {
   background: #ddd;
 }
 
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .game-info {
+  width: 250px;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 #sort {
   margin: 20px;
   width: 100px;
   height: 50px;
+}
+
+.game-board {
+  border: 2px solid black;
+  margin: 20px;
+  width: 784px;
+  height: 784px;
+}
+
+.status {
+  font-size: 14px;
+  color: blue;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.one-bold {
+  text-align: center;
+  width: 250px;
+}
+
+/* Chat containers */
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Darker chat container */
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style images */
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Style time text */
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #999;
 }

@@ -246,7 +246,7 @@ class Game extends React.Component {
             <button
               type="button"
               id={id}
-              className="one-bold"
+              className="btn btn-primary one-bold"
               onClick={() => this.jumpTo(move)}
             >
               {desc}
@@ -254,7 +254,7 @@ class Game extends React.Component {
           </li>
         );
       }
-      return <div />;
+      return <div key={id} />;
     });
 
     let status;
@@ -274,12 +274,56 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div className="status">{status}</div>
           <ol id="moves">{moves}</ol>
         </div>
-        <button id="sort" type="button" onClick={() => this.sort()}>
+        <button
+          id="sort"
+          type="button"
+          className="btn btn-light"
+          onClick={() => this.sort()}
+        >
           {this.state.sort}
         </button>
+        <div className="chat">
+          <div className="container">
+            <img
+              src="https://www.w3schools.com/w3images/bandmember.jpg"
+              alt="Avatar"
+            />
+            <p>Hello. How are you today?</p>
+            <span className="time-right">11:00</span>
+          </div>
+
+          <div className="container darker">
+            <img
+              src="https://www.w3schools.com/w3images/avatar_g2.jpg"
+              alt="Avatar"
+              className="right"
+            />
+            <p>Hey! I&#39;m fine. Thanks for asking!</p>
+            <span className="time-left">11:01</span>
+          </div>
+
+          <div className="container">
+            <img
+              src="https://www.w3schools.com/w3images/bandmember.jpg"
+              alt="Avatar"
+            />
+            <p>Sweet! So, what do you wanna do today?</p>
+            <span className="time-right">11:02</span>
+          </div>
+
+          <div className="container darker">
+            <img
+              src="https://www.w3schools.com/w3images/avatar_g2.jpg"
+              alt="Avatar"
+              className="right"
+            />
+            <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+            <span className="time-left">11:05</span>
+          </div>
+        </div>
       </div>
     );
   }

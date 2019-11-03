@@ -20,8 +20,14 @@ function handleLogin() {
       const token = `Bearer ${response.data.token}`;
       axios
         .get("http://localhost:3001/me", { headers: { Authorization: token } })
-        .then()
-        .catch();
+        .then(
+          response.status === 200
+            ? (window.location.href = "/")
+            : (window.location.href = "/user/login")
+        )
+        .catch
+        // window.location.href = '/user/login'
+        ();
     })
     .catch();
 }
@@ -39,9 +45,11 @@ function handleRegister() {
       }
     })
     .then(() => {
-      return <Home />;
+      window.location.href = "/user/login";
     })
-    .catch();
+    .catch(() => {
+      window.location.href = "/user/register";
+    });
 }
 export default function App() {
   return (
@@ -64,20 +72,12 @@ export default function App() {
                 Login
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" id="logged" to="/loggedin">
-                Loggedin
-              </Link>
-            </li>
           </ul>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/loggedin/">
-            <Loggedin name="HE" />
-          </Route>
           <Route path="/user/login">
             <Login />
           </Route>
@@ -147,17 +147,6 @@ function Login() {
       <Button variant="primary" type="button" onClick={handleLogin}>
         Submit
       </Button>
-    </Form>
-  );
-}
-
-function Loggedin(name) {
-  return (
-    <Form>
-      <Form.Group controlId="name">
-        <Form.Label>{name}</Form.Label>
-        <Form.Control type="text" />
-      </Form.Group>
     </Form>
   );
 }

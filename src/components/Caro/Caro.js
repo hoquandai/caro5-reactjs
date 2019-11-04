@@ -285,6 +285,9 @@ class Game extends React.Component {
         >
           {this.state.sort}
         </button>
+        <a className="nav-link" href="/user/updateinfo">
+          UPDATE INFO
+        </a>
         <div className="chat">
           <div className="container">
             <img

@@ -189,16 +189,28 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
-    this.setState({
-      history: history.concat([
-        {
-          squares
+    this.setState(
+      {
+        history: history.concat([
+          {
+            squares
+          }
+        ]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+        positions: pos
+      },
+      () => {
+        if (this.state.xIsNext === false) {
+          for (let j = 0; j < squares.length; j++) {
+            if (squares[j] == null) {
+              this.handleClick(j);
+              return;
+            }
+          }
         }
-      ]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
-      positions: pos
-    });
+      }
+    );
   }
 
   jumpTo(step) {
@@ -277,17 +289,19 @@ class Game extends React.Component {
           <div className="status">{status}</div>
           <ol id="moves">{moves}</ol>
         </div>
-        <button
-          id="sort"
-          type="button"
-          className="btn btn-light"
-          onClick={() => this.sort()}
-        >
-          {this.state.sort}
-        </button>
-        <a className="nav-link" href="/user/updateinfo">
-          UPDATE INFO
-        </a>
+        <div className="options">
+          <button
+            id="sort"
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => this.sort()}
+          >
+            {this.state.sort}
+          </button>
+          <a className="nav-link btn btn-secondary" href="/user/updateinfo">
+            UPDATE INFO
+          </a>
+        </div>
         <div className="chat">
           <div className="container">
             <img
